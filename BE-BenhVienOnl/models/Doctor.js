@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+const DoctorSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -10,26 +10,16 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  password: {
+  phone: {
     type: String,
     required: true,
   },
-  role: {
+  address: {
     type: String,
-    enum: ["patient", "doctor", "admin"],
-    default: "patient",
   },
   department: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Department",
-  },
-  phone: {
-    type: String,
-    required: false,
-  },
-  address: {
-    type: String,
-    required: false,
+    ref: "Department", // Liên kết với model Department
   },
   date: {
     type: Date,
@@ -37,4 +27,4 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Doctor", DoctorSchema);

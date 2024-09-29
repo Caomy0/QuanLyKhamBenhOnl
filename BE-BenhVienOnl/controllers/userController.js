@@ -3,10 +3,11 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../config/mailer");
+const Department = require("../models/Department");
 
 // Register user
 exports.registerUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, phone, address } = req.body;
 
   try {
     let user = await User.findOne({ email });
@@ -20,6 +21,8 @@ exports.registerUser = async (req, res) => {
       email,
       password,
       role,
+      phone,
+      address,
     });
 
     const salt = await bcrypt.genSalt(10);
@@ -157,7 +160,6 @@ exports.getUserByIdAndRole = async (req, res) => {
       role: user.role,
       phone: user.phone,
       address: user.address,
-      date: user.date,
     });
   } catch (err) {
     console.error(err.message);
@@ -186,6 +188,33 @@ exports.updateUserByIdAndRole = async (req, res) => {
     await user.save();
 
     res.json({ msg: "User information updated successfully", user });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+// Cập nhật khoa của bác sĩ
+exports.updateDoctorDepartment = async (req, res) => {
+  const { doctorId, departmentId } = req.body;
+
+  try {
+    const doctor = await User.findOne({ _id: doctorId, role: "doctor" });
+    const department = await Department.findById(departmentId);
+
+    if (!doctor) {
+      return res.status(404).json({ msg: "Doctor not found" });
+    }
+
+    if (!department) {
+      return res.status(404).json({ msg: "Department not found" });
+    }
+
+    // Cập nhật khoa cho bác sĩ
+    doctor.department = department._id;
+    await doctor.save();
+
+    res.json({ msg: "Doctor updated with department successfully", doctor });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

@@ -23,6 +23,8 @@ app.use("/api/appointments", require("./routes/appointment"));
 app.use("/api/medical-records", require("./routes/medicalRecord"));
 app.use("/api/prescriptions", require("./routes/prescription"));
 app.use("/api/invoices", require("./routes/invoice"));
+app.use("/api/doctors", require("./routes/doctor"));
+app.use("/api/departments", require("./routes/department"));
 
 // Start the server
 const PORT = process.env.PORT || 5000;
