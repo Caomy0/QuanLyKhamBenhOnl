@@ -7,37 +7,21 @@ exports.createDoctor = async (req, res) => {
   const { userId, age, gender, contact, departmentId } = req.body;
 
   try {
-    // Kiểm tra xem user có tồn tại không
-    const existingUser = await User.findById(userId);
-
-    if (!existingUser) {
+    // Kiểm tra xem user (bác sĩ) có tồn tại không
+    const user = await User.findById(userId);
+    if (!user) {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    // Kiểm tra role của user, nếu không phải doctor thì trả về lỗi
-    if (existingUser.role !== "doctor") {
-      return res
-        .status(403)
-        .json({ msg: "Unauthorized to create doctor record for this user" });
-    }
-
-    // Kiểm tra xem bác sĩ đã tồn tại chưa dựa trên userId
-    let doctor = await Doctor.findOne({ user: userId });
-
-    if (doctor) {
+    // Kiểm tra xem bác sĩ đã có hồ sơ chưa
+    const existingDoctor = await Doctor.findOne({ user: userId });
+    if (existingDoctor) {
       return res.status(400).json({ msg: "Doctor record already exists" });
     }
 
-    // Tìm department
-    const department = await Department.findById(departmentId);
-
-    if (!department) {
-      return res.status(404).json({ msg: "Department not found" });
-    }
-
     // Tạo hồ sơ bác sĩ mới
-    doctor = new Doctor({
-      user: userId, // Liên kết với userId của bác sĩ
+    const doctor = new Doctor({
+      user: userId,
       age,
       gender,
       contact,
@@ -45,8 +29,7 @@ exports.createDoctor = async (req, res) => {
     });
 
     await doctor.save();
-
-    res.json({ msg: "Doctor created successfully", doctor });
+    res.status(201).json({ msg: "Doctor created successfully", doctor });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

@@ -8,9 +8,11 @@ const {
   getUserByIdAndRole,
   updateUserByIdAndRole,
   updateDoctorDepartment,
+  registerDoctor,
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);
+router.post("/registerDoctor", registerDoctor);
 
 router.post("/login", loginUser);
 

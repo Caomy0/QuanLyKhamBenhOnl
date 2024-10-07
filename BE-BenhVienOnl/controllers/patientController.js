@@ -15,11 +15,9 @@ exports.createPatient = async (req, res) => {
 
     // Kiểm tra role của user, nếu không phải patient thì trả về lỗi
     if (existingUser.role !== "patient") {
-      return res
-        .status(403)
-        .json({
-          msg: "Unauthorized to create patient record for this user because the role is not patient",
-        });
+      return res.status(403).json({
+        msg: "Unauthorized to create patient record for this user because the role is not patient",
+      });
     }
 
     // Kiểm tra xem user này đã có hồ sơ bệnh nhân chưa
@@ -65,7 +63,8 @@ exports.getPatients = async (req, res) => {
 // Xem chi tiết một bệnh nhân
 exports.getPatientById = async (req, res) => {
   try {
-    const patient = await Patient.findById(req.params.id).populate(
+    // Tìm bệnh nhân dựa trên ID của User (req.params.id là ID của User)
+    const patient = await Patient.findOne({ user: req.params.id }).populate(
       "user",
       "name email"
     );
