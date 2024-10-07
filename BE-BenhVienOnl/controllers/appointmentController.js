@@ -1,5 +1,5 @@
 const Appointment = require("../models/Appointment");
-const User = require("../models/User");
+const Doctor = require("../models/Doctor");
 const Patient = require("../models/Patient");
 
 // Tạo cuộc hẹn mới
@@ -7,22 +7,22 @@ exports.createAppointment = async (req, res) => {
   const { patientId, doctorId, date, reason } = req.body;
 
   try {
-    // Kiểm tra xem bệnh nhân và bác sĩ có tồn tại không
+    // Kiểm tra xem bệnh nhân có tồn tại không
     const patient = await Patient.findById(patientId);
-    const doctor = await User.findById(doctorId);
-
     if (!patient) {
       return res.status(404).json({ msg: "Patient not found" });
     }
 
-    if (!doctor || doctor.role !== "doctor") {
+    // Kiểm tra xem bác sĩ có tồn tại không trong model Doctor
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
       return res.status(404).json({ msg: "Doctor not found" });
     }
 
     // Tạo cuộc hẹn mới
     const appointment = new Appointment({
       patient: patientId,
-      doctor: doctorId,
+      doctor: doctorId, // Sử dụng doctorId từ model Doctor
       date,
       reason,
     });

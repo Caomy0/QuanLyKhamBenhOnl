@@ -1,28 +1,28 @@
 const Prescription = require("../models/Prescription");
 const Patient = require("../models/Patient");
-const User = require("../models/User");
+const Doctor = require("../models/Doctor");
 
 // Tạo đơn thuốc mới
 exports.createPrescription = async (req, res) => {
   const { patientId, doctorId, medicines } = req.body;
 
   try {
-    // Kiểm tra bệnh nhân và bác sĩ có tồn tại hay không
+    // Kiểm tra xem bệnh nhân có tồn tại không
     const patient = await Patient.findById(patientId);
-    const doctor = await User.findById(doctorId);
-
     if (!patient) {
       return res.status(404).json({ msg: "Patient not found" });
     }
 
-    if (!doctor || doctor.role !== "doctor") {
+    // Kiểm tra xem bác sĩ có tồn tại trong model Doctor không
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
       return res.status(404).json({ msg: "Doctor not found" });
     }
 
     // Tạo đơn thuốc mới
     const prescription = new Prescription({
       patient: patientId,
-      doctor: doctorId,
+      doctor: doctorId, // Sử dụng doctorId từ model Doctor
       medicines,
     });
 

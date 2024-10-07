@@ -7,7 +7,7 @@ const Department = require("../models/Department");
 
 // Register user
 exports.registerUser = async (req, res) => {
-  const { name, email, password, role, phone, address } = req.body;
+  const { name, email, password, phone, address } = req.body;
 
   try {
     let user = await User.findOne({ email });
@@ -20,7 +20,7 @@ exports.registerUser = async (req, res) => {
       name,
       email,
       password,
-      role,
+
       phone,
       address,
     });
@@ -67,7 +67,7 @@ exports.loginUser = async (req, res) => {
       { expiresIn: "1h" },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ token, user: { id: user._id, role: user.role } }); // Include user information
       }
     );
   } catch (err) {

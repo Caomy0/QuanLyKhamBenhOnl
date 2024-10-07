@@ -13,6 +13,15 @@ exports.createPatient = async (req, res) => {
       return res.status(404).json({ msg: "User not found" });
     }
 
+    // Kiểm tra role của user, nếu không phải patient thì trả về lỗi
+    if (existingUser.role !== "patient") {
+      return res
+        .status(403)
+        .json({
+          msg: "Unauthorized to create patient record for this user because the role is not patient",
+        });
+    }
+
     // Kiểm tra xem user này đã có hồ sơ bệnh nhân chưa
     const existingPatient = await Patient.findOne({ user });
 
@@ -20,6 +29,7 @@ exports.createPatient = async (req, res) => {
       return res.status(400).json({ msg: "Patient record already exists" });
     }
 
+    // Tạo mới hồ sơ bệnh nhân
     const patient = new Patient({
       user,
       age,
@@ -73,12 +83,22 @@ exports.getPatientById = async (req, res) => {
 
 // Cập nhật thông tin bệnh nhân
 exports.updatePatient = async (req, res) => {
-  const { age, gender, medicalHistory, phone, address } = req.body;
+  const { role, age, gender, medicalHistory, phone, address } = req.body;
 
   try {
+    // Kiểm tra role có phải là patient không
+    if (role !== "patient") {
+      return res
+        .status(403)
+        .json({ msg: "Unauthorized to update patient information" });
+    }
+
+    console.log("Patient ID from request:", req.params.id); // Log ID
+
     let patient = await Patient.findById(req.params.id);
 
     if (!patient) {
+      console.log("Patient not found with ID:", req.params.id); // Log if not found
       return res.status(404).json({ msg: "Patient not found" });
     }
 

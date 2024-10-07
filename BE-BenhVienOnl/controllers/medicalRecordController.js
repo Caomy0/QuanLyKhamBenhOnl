@@ -1,28 +1,28 @@
 const MedicalRecord = require("../models/MedicalRecord");
 const Patient = require("../models/Patient");
-const User = require("../models/User");
+const Doctor = require("../models/Doctor");
 
 // Tạo hồ sơ bệnh án mới
 exports.createMedicalRecord = async (req, res) => {
   const { patientId, doctorId, diagnosis, treatment, notes } = req.body;
 
   try {
-    // Kiểm tra bệnh nhân và bác sĩ có tồn tại hay không
+    // Kiểm tra xem bệnh nhân có tồn tại không
     const patient = await Patient.findById(patientId);
-    const doctor = await User.findById(doctorId);
-
     if (!patient) {
       return res.status(404).json({ msg: "Patient not found" });
     }
 
-    if (!doctor || doctor.role !== "doctor") {
+    // Kiểm tra xem bác sĩ có tồn tại trong model Doctor không
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
       return res.status(404).json({ msg: "Doctor not found" });
     }
 
     // Tạo hồ sơ bệnh án mới
     const medicalRecord = new MedicalRecord({
       patient: patientId,
-      doctor: doctorId,
+      doctor: doctorId, // Sử dụng doctorId từ model Doctor
       diagnosis,
       treatment,
       notes,
