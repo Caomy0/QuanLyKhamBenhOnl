@@ -1,0 +1,142 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.box-info {
+    background-color: #e9fdff;
+    border-radius: 20px;
+    margin: 20px 0px;
+    padding: 30px;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-grow-5 {
+    flex-grow: 5;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+header {
+    padding: 0px 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background-color: #98ddff;
+
+    .bi.bi-person-fill {
+        font-size: 5rem;
+        display: flex;
+        width: fit-content;
+    }
+
+    .flex-grow-1 .row {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        div {
+            width: fit-content;
+        }
+    }
+
+    .option {
+        gap: 10px;
+
+        button {
+            width: 20%;
+            height: 45px;
+            border-top-right-radius: 30px;
+            border: 0.1px solid rgb(255, 255, 255);
+        }
+    }
+
+    .flex-grow-5 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+}
+
+main {
+    height: 80vh;
+    font-weight: bold;
+
+    .account-info {
+
+        .row {
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        label,
+        p,
+        button {
+            width: fit-content;
+            margin: 0;
+        }
+
+        label {
+            max-width: 200px;
+            width: 100%;
+        }
+
+        p {
+            padding-left: 10px;
+        }
+
+        button {
+            color: black;
+        }
+    }
+
+    .user-info {
+        .row {
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        label,
+        p,
+        button {
+            width: fit-content;
+            margin: 0;
+        }
+
+        label {
+            max-width: 200px;
+            width: 100%;
+        }
+
+        p {
+            padding-left: 10px;
+        }
+
+        button {
+            color: black;
+        }
+    }
+}
+
+footer {
+    background-color: lightgrey;
+    padding: 20px;
+    font-size: 1.3rem;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+
+    .flex-end {
+        gap: 10px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
