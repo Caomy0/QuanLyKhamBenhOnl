@@ -1,0 +1,271 @@
+a {
+    text-decoration: none !important;
+}
+
+.flex-end {
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url(../img/image-51.png);
+    background-repeat: no-repeat;
+    background-position: right;
+
+    img {
+        width: 50%;
+    }
+}
+
+nav {
+    text-align: center;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+nav li {
+    list-style-type: none;
+    padding: 0 10px;
+}
+
+nav ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.btn-header {
+    justify-content: flex-end;
+}
+
+.user-header {
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4em;
+    p {
+        margin: 0;
+    }
+}
+
+.section1 {
+    background-image: url("../img/Rectangle-13.png");
+    background-repeat: no-repeat;
+    background-position: right;
+
+    padding-bottom: 30px;
+
+    button {
+        width: 30%;
+    }
+}
+
+.infomation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section1 .col .row {
+    gap: 10px;
+}
+
+.card {
+    flex-basis: 320px;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+[class^="section"] {
+    padding: 50px 50px;
+}
+
+[class^="section"]:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container>div:not(:first-child) {
+    padding: 50px 50px;
+}
+
+.section2 {
+    img {
+        width: 25%;
+    }
+}
+
+.section3 {
+    background-color: #FFDCD1;
+
+    .row {
+        min-height: 500px;
+        align-items: center;
+    }
+
+    img {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+}
+
+.section4 {
+    img {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+}
+
+.card-body .link {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rating {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.price {
+    display: flex;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.other {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+
+    .time,
+    .lesson,
+    .progress-link {
+        display: flex;
+        gap: 5px;
+    }
+}
+
+.section4 button {
+    border-radius: 50px;
+    height: 50px;
+    width: 160px;
+}
+
+.star-rating {
+    direction: ltr;
+    font-size: 1.5rem;
+    display: inline-block;
+}
+
+.star-rating i {
+    cursor: pointer;
+    color: gold;
+    transition: color 0.2s;
+}
+
+.star-rating i.bi-star {
+    color: lightgray;
+}
+
+.star-rating span {
+    position: relative;
+}
+
+.star-rating span:before {
+    content: '\f005';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+    color: lightgray;
+    font-family: "bootstrap-icons";
+    font-weight: normal;
+    font-size: 2rem;
+    z-index: 1;
+    transition: color 0.2s, width 0.2s;
+}
+
+.star-rating span:hover:before,
+.star-rating span:hover~span:before {
+    color: gold;
+}
+
+.avatar {
+    width: fit-content !important;
+}
+
+.section6 {
+    padding: 50px 0;
+
+    .col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.submit-email {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    input {
+        width: 50%;
+        padding: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.116);
+        background-color: rgba(156, 156, 156, 0.075);
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .btn {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+}
+
+.section7 {
+    font-weight: bold;
+    padding: 50px 0;
+
+    p {
+        i {
+            padding-right: 10px;
+        }
+    }
+}
+
+.footer {
+    background-color: #f0f0f0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    padding: 30px 50px !important;
+
+    .col {
+        display: flex;
+        align-items: center;
+
+        p {
+            margin: 0;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            width: 100%;
+            font-size: larger;
+
+            a {
+                width: fit-content;
+            }
+        }
+    }
+}
