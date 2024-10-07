@@ -1,21 +1,16 @@
 const mongoose = require("mongoose");
 
 const DoctorSchema = new mongoose.Schema({
-  name: {
-    type: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // Liên kết với model User
     required: true,
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  phone: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
+  age: Number,
+  gender: String,
+  contact: {
+    phone: String,
+    address: String,
   },
   department: {
     type: mongoose.Schema.Types.ObjectId,
